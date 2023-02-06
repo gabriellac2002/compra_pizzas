@@ -21,6 +21,18 @@ pizzaJson.map((item,index) => {
     pizzaItem.querySelector('.pizza-item--price').innerHTML = `R$ ${item.price.toFixed(2)}`;
     pizzaItem.querySelector('.pizza-item--img img').src = item.img;
 
+    pizzaItem.querySelector('a').addEventListener('click', (e) => {
+        e.preventDefault(); //impede a ação padrão que no caso é atualizar a tela
+        //console.log("Clicou na pizza");
+
+        //abrir o modal
+        c('.pizzaWindowArea').style.opacity = 0;
+        c('.pizzaWindowArea').style.display = 'flex';
+        setTimeout(() => {
+            c('.pizzaWindowArea').style.opacity = 1;
+        },200);
+    });
+
     //adiciona as pizzas na classe pizza-area
     c('.pizza-area').append(pizzaItem);
 
