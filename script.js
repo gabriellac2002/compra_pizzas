@@ -15,6 +15,9 @@ pizzaJson.map((item,index) => {
     //pega a classe pizza-item pelo DOM e clona
     let pizzaItem = c('.models .pizza-item').cloneNode(true);
 
+    //insere a chave da pizza especifica clicada
+    pizzaItem.setAttribute('data-key', index);
+
     //coloca as informações nos lugares
     pizzaItem.querySelector('.pizza-item--name').innerHTML = item.name;
     pizzaItem.querySelector('.pizza-item--desc').innerHTML = item.description;
@@ -24,6 +27,15 @@ pizzaJson.map((item,index) => {
     pizzaItem.querySelector('a').addEventListener('click', (e) => {
         e.preventDefault(); //impede a ação padrão que no caso é atualizar a tela
         //console.log("Clicou na pizza");
+
+        //pega a pizza que esta sendo clicada
+        let key = e.target.closest('.pizza-item').getAttribute('data-key');
+        // console.log("Pizza clicada: " + key);
+
+        //preecher o modal
+        c('.pizzaBig img').src = pizzaJson[key].img;
+        c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
+        c('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
 
         //abrir o modal
         c('.pizzaWindowArea').style.opacity = 0;
