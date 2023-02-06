@@ -36,6 +36,8 @@ pizzaJson.map((item,index) => {
         c('.pizzaBig img').src = pizzaJson[key].img;
         c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
         c('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
+        c('.pizzaInfo--actualPrice').innerHTML = `R$ ${pizzaJson[key].price.toFixed(2)}`;
+        cAll('.pizzaInfo--sizes')
 
         //abrir o modal
         c('.pizzaWindowArea').style.opacity = 0;
