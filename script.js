@@ -1,5 +1,8 @@
 console.log(pizzaJson);
 
+//quantidades de pizzas selecionada no modal
+let modalQt = 1;
+
 //função para retornar o querrySelector
 const c = ( e ) => {
     return document.querySelector(e);
@@ -28,6 +31,8 @@ pizzaJson.map((item,index) => {
         e.preventDefault(); //impede a ação padrão que no caso é atualizar a tela
         //console.log("Clicou na pizza");
 
+        modalQt = 1;
+
         //pega a pizza que esta sendo clicada
         let key = e.target.closest('.pizza-item').getAttribute('data-key');
         // console.log("Pizza clicada: " + key);
@@ -37,7 +42,17 @@ pizzaJson.map((item,index) => {
         c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
         c('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
         c('.pizzaInfo--actualPrice').innerHTML = `R$ ${pizzaJson[key].price.toFixed(2)}`;
-        cAll('.pizzaInfo--sizes')
+        //slecionar o tamanho
+        c('.pizzaInfo--size.selected').classList.remove('selected'); //deseleciona o selected
+        cAll('.pizzaInfo--size').forEach((size,sizeIndex) => {
+            if(sizeIndex == 2)
+            {
+                size.classList.add('selected');
+            }
+            size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
+        });
+
+        c('.pizzaInfo--qt').innerHTML = modalQt ;
 
         //abrir o modal
         c('.pizzaWindowArea').style.opacity = 0;
