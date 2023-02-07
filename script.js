@@ -12,6 +12,7 @@ const cAll = ( e ) => {
     return document.querySelectorAll(e);
 }
 
+//listagem das pizzas
 pizzaJson.map((item,index) => {
     // console.log(item)
 
@@ -65,4 +66,19 @@ pizzaJson.map((item,index) => {
     //adiciona as pizzas na classe pizza-area
     c('.pizza-area').append(pizzaItem);
 
+});
+
+//acoes do modal
+
+//fecha o modal
+function closeModal () {
+    c('.pizzaWindowArea').style.opacity = 0;
+    setTimeout(() => {
+        c('.pizzaWindowArea').style.display = 'none';
+    },500);
+}
+
+//gera um array com os dois botoes e para cada botao atribui um evento de click 'acionando' a funcao de fechar o modal
+cAll('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach((item) => {
+    item.addEventListener('click', closeModal);
 });
