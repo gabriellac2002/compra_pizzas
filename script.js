@@ -1,7 +1,16 @@
 console.log(pizzaJson);
 
+//********variaveis globais************
 //quantidades de pizzas selecionada no modal
 let modalQt = 1;
+
+//array do carrinho
+let cart = [];
+
+//guardar a chave da pizza
+let modalKey = 0;
+
+//**************************************
 
 //função para retornar o querrySelector
 const c = ( e ) => {
@@ -36,6 +45,7 @@ pizzaJson.map((item,index) => {
 
         //pega a pizza que esta sendo clicada
         let key = e.target.closest('.pizza-item').getAttribute('data-key');
+        modalKey = key;
         // console.log("Pizza clicada: " + key);
 
         //preecher o modal
@@ -101,4 +111,24 @@ cAll('.pizzaInfo--size').forEach((size,sizeIndex) => {
         c('.pizzaInfo--size.selected').classList.remove('selected');
         size.classList.add('selected');
     });
+});
+
+//botao adicionar ao carrinho
+c('.pizzaInfo--addButton').addEventListener('click', () => {
+    //qual a pizza?
+    console.log("Pizza: " +modalKey);
+    //qual o tamanho selecionado?
+    let size = parseInt(c('.pizzaInfo--size.selected').getAttribute('data-key'));
+    console.log('Tamanho: ' + size);
+    //quantas pizzas?
+    console.log(modalQt);
+
+    //adicionando ao carrinho
+    cart.push({
+        id:pizzaJson[modalKey].id,
+        size,
+        qt:modalQt
+    });
+
+    closeModal();
 });
