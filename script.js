@@ -119,16 +119,29 @@ c('.pizzaInfo--addButton').addEventListener('click', () => {
     console.log("Pizza: " +modalKey);
     //qual o tamanho selecionado?
     let size = parseInt(c('.pizzaInfo--size.selected').getAttribute('data-key'));
+
+    //verifica se tem um item igual no carrinho
+    let identifier = pizzaJson[modalKey].id + '@' + size;
+    let key = cart.findIndex((item) => {
+        return item.identifier == identifier;
+    });
+
     console.log('Tamanho: ' + size);
     //quantas pizzas?
     console.log(modalQt);
 
-    //adicionando ao carrinho
-    cart.push({
-        id:pizzaJson[modalKey].id,
-        size,
-        qt:modalQt
-    });
+    if(key > -1){
+        cart[key].qt += modalQt;
+    } else {
+        //adicionando ao carrinho
+        cart.push({
+            identifier,
+            size,
+            qt:modalQt
+        });
+    }
+
+   
 
     closeModal();
 });
