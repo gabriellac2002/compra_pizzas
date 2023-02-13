@@ -149,12 +149,20 @@ c('.pizzaInfo--addButton').addEventListener('click', () => {
 function updateCart(){
     if(cart.length > 0){
         c('aside').classList.add('show');
+        c('.cart').innerHTML = '';
+
         for(let i in cart){
             let pizzaItem = pizzaJson.find((item) => {
                 return item.id == cart[i].id;
             });
 
-           
+           //preenchendo as informações
+            let cartItem = c('.models .cart--item').cloneNode(true);
+
+            cartItem.querySelector('.img').src = pizzaItem.img;
+            cartItem.querySelector('.cart--item-nome').innerHTML = pizzaItem.name; 
+
+            c('.cart').append(cartItem);
         }
     } else {
         c('aside').classList.remove('show');
